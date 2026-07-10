@@ -27,8 +27,8 @@ def make_form_url_from_series(target_dict: dict, series: pd.Series, name: str) -
 
     match = re.search(r'\*\*Location\*\*:\s*(.*)', series["Info"].item(), re.DOTALL)
     if match:
-        activity_text = match.group(1).strip()   
-        query_params["entry.822294937"] = activity_text
+        location_text = match.group(1).strip()   
+        query_params["entry.822294937"] = location_text
     
     query_string = urlencode(query_params)
     url = f"{base_url}{form_id}/viewform?{query_string}"
