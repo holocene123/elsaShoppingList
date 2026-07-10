@@ -74,8 +74,14 @@ def make_dataframe_from_source(source_dict: dict) -> pd.DataFrame:
 
 
     df["Location"] = df["Info"].apply(
-        lambda info: re.search(r'\*\*Location\*\*:\s*(.*)', info, re.DOTALL).group(1).strip()
-        if re.search(r'\*\*Location\*\*:\s*(.*)', info, re.DOTALL)
+        lambda info: re.search(r'\*\*Location\*\*:\s*(.*?)\s*\*\*Activity\*\*', info, re.DOTALL).group(1).strip()
+        if re.search(r'\*\*Location\*\*:\s*(.*?)\s*\*\*Activity\*\*', info, re.DOTALL)
+        else ""
+    )
+
+    df["Activity"] = df["Info"].apply(
+        lambda info: re.search(r'\*\*Activity\*\*:\s*(.*)', info, re.DOTALL).group(1).strip()
+        if re.search(r'\*\*Activity\*\*:\s*(.*)', info, re.DOTALL)
         else ""
     )
 
@@ -92,7 +98,8 @@ def make_dataframe_from_source(source_dict: dict) -> pd.DataFrame:
         "Model",
         "Color",
         "Info",
-        "Location"
+        "Location",
+        "Activity"
     ]
 
     df = df[final_columns]
