@@ -44,6 +44,7 @@ if melt_plates_df.shape[0] > 0:
             "State_Plate": "Plate",
             "Vehicle": "Vehicle Description",
             "Location": "Location",
+            "Activity": "Activity"
         },
         on_select="rerun",
         selection_mode="single-row",
